@@ -6,8 +6,7 @@ import re # Regular Expression --RegEx
 # CEP 5 dígitos + hífen (opcional) + 3 dígitos
 
 #Compilação de um padrão com o re.compile():
-padrao = re.compile("[0-9]{5}[-]?[0-9]{3}") #Colocando o hifen de 0-9 nos conjuntos nos mostra que os dígitos de 0 ATÉ 9 são válidos ...
-#...e o {numero} na frente nos mostra o quantificadores, que são quantos conjuntos daquilo irá repetir
+padrao = re.compile("[0-9]{5}[-]{0,1}[0-9]{3}") #Colocando um limite, ou seja, que o hifen pode aparece de zero até uma vez, para esse exemplo faz o mesmo que o ?
 
 #A busca do padrão feito no re.compile em um endereço com o .search()
 busca = padrao.search(endereco) #retorna Match ou None e None é naturalemnte False no if
