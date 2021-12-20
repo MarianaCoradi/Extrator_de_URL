@@ -20,7 +20,6 @@ class ExtratorURL:
         if not match:
             raise ValueError("A URL não é válida")
 
-
     def get_url_base(self):
         indice_interrogacao = self.url.find("?")
         url_base = self.url[:indice_interrogacao]
@@ -43,7 +42,25 @@ class ExtratorURL:
 
         return valor
 
-url = "http://bytebank.com/cambio?moedaDestino=dolar&quantidade=100&moedaOrigem=real"
+    def __len__(self):
+        return len(self.url)
+
+    def __str__(self):
+        return "URL Geral: " + self.url + "\n" + "Parâmetros: " + self.get_url_parametros() + "\n" + "URL Base: " + self.get_url_base()
+
+    def __eq__(self, outro_objeto):
+        return self.url == outro_objeto.url
+
+url = "bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
+url2 = "http://bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
+
 extrator_url = ExtratorURL(url)
-valor_quantidade = extrator_url.get_valor_parametro("quantidade")
-print(valor_quantidade)
+extrator_url_2 = ExtratorURL(url2)
+
+print(extrator_url == extrator_url_2)
+
+print("\nO tamanho da URL: {}\n" .format(len(extrator_url)))
+print(extrator_url)
+
+valor = extrator_url.get_valor_parametro("moedaDestino")
+print("\nO valor do meu parâmetro na URL: {} " .format(valor))
